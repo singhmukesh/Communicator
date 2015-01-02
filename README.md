@@ -25,6 +25,9 @@ just a few minutes.
     - `privateKey.pem`
     - `publicCert.pem`
 
+- Edit the `app.json` file and fix the following:
+    - make sure the `repository` URL points to your clone of this repository
+    
 - Check in the certificates into the `/certs` directory of this repository
 - Press the 'Deploy To Heroku' button
 - 
@@ -36,7 +39,7 @@ just a few minutes.
 Tutorial: Build a Rails App with Weemo
 ================================================================
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/sheffler/preview-tutorial-rails-heroku"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy on Heroku"></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/sightcall/communicator-test"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy on Heroku"></a></p>
 
 
 This repository hosts an example Rails project that illustrates how to
