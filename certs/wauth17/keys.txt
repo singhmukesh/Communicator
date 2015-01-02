@@ -1,0 +1,13 @@
+Provider: WA_998_tsheffler_wauth17_031
+
+Email: tom.sheffler+wauth17@gmail.com
+Password: passwauth17
+
+AppID: q7w4fktzzuf7
+
+Passphrase: XnyexbUF
+
+Domain: tsheffler.wauth17
+
+ClientID: e43cfcda02f45b39d347509d509817
+ClientSecret: 6011b6d3a2d64d77fb4086b44996bf

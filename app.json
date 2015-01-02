@@ -1,0 +1,31 @@
+{
+    "name": "SightCall Communicator on Heroku",
+    "description": "Demonstration collaboration site showing SightCall features",
+    "keywords": [
+        "video",
+        "HTML5",
+        "WebRTC",
+        "Real-time Communication"
+    ],
+    "website": "https://sightcall.com/",
+    "repository": "https://github.com/sheffler/preview-tutorial-rails-heroku",
+    "logo": "http://sightcall.wpengine.com/wp-content/uploads/2014/07/SightCall-Grey-Orange-e1405175386625.png",
+    "success_url": "/",
+    "addons": ["heroku-postgresql:hobby-dev"]
+    "scripts": {
+        "postdeploy": "bundle exec rake bootstrap"
+    },
+    "env": {
+        "RAILS_ENV": "production",
+        "RACK_ENV" : "production",
+        "RTCC_APP_ID" : "<< your APP_ID here >>",
+        "RTCC_AUTH_URL" : "https://auth.rtccloud.net/auth/",
+        "RTCC_CACERT" : "certs/authCA.crt",
+        "RTCC_CERTPASSWORD" : "<< your CERT PASSWORD  here>>",
+        "RTCC_CLIENTCERT" : "certs/publicCert.pem",
+        "RTCC_CLIENTCERT_KEY" : "certs/privateKey.pem",
+        "RTCC_CLIENT_ID" : "<< your CLIENT ID here>>",
+        "RTCC_CLIENT_SECRET" : "<< your CLIENT SECRET here >>",
+        "CLOUDRECORDER_TOKEN" : ""
+    },
+}

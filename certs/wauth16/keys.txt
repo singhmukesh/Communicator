@@ -1,0 +1,13 @@
+Provider: WA_998_tsheffler_wauth16
+
+Email: tom.sheffler+wauth16@gmail.com
+
+AppID: 4wsd70clgrup
+
+ClientID: 6uanat9urpzuujdgeu1h0hj2huesnd
+ClientSecret: wka0hhv8skwqi1yohqo27y4qsnss3x
+
+Domain: tsheffler.wauth16
+
+Username: tom.sheffler+wauth16a@gmail.com
+Password: f546302dc2
