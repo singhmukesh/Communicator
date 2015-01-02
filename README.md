@@ -39,7 +39,7 @@ just a few minutes.
 Tutorial: Build a Rails App with Weemo
 ================================================================
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/sightcall/communicator-test"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy on Heroku"></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/sightcall/communicator_test"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy on Heroku"></a></p>
 
 
 This repository hosts an example Rails project that illustrates how to
