@@ -1,4 +1,0 @@
-Name: tsheffler testing wauth9
-AppID: 3b04d9add47c
-ClientID: 7a19fe1dc8b6f820addfa16bd9fe9c
-ClientSecret: f169c6f3c76773c63342d506b02dfd
