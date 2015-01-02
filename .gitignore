@@ -20,6 +20,6 @@
 
 # Do not share our certs and info
 /certs/client.p12
-/certs/privateKey.pem
-/certs/publicCert.pem
+# /certs/privateKey.pem
+# /certs/publicCert.pem
 /certs/keys.txt
