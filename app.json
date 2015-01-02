@@ -11,7 +11,7 @@
     "repository": "https://github.com/sightcall/communicator_test",
     "logo": "http://sightcall.wpengine.com/wp-content/uploads/2014/07/SightCall-Grey-Orange-e1405175386625.png",
     "success_url": "/",
-    "addons": ["heroku-postgresql:hobby-dev"]
+    "addons": ["heroku-postgresql:hobby-dev"],
     "scripts": {
         "postdeploy": "bundle exec rake bootstrap"
     },
