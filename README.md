@@ -18,14 +18,50 @@ into your own site.
 You can run your own instance of SightCall Communicator on Heroku in
 just a few minutes.
 
-- Clone this repository so you can customize it.  Make your repo public.
+- Clone this repository so you can customize it.
 - If you have not already, you must request an API KEY from SightCall.  [http://www.sightcall.com/developers/](http://www.sightcall.com/developers/)
+- Put the files `client.p12` and `authCA.crt` in the `certs` directory.  Check them in.
+
 - Unpack your `client.p12` file into its two components  (see instructions in [Ruby](https://github.com/weemo/Server-SDKs/tree/master/Ruby)).
 
     - `privateKey.pem`
     - `publicCert.pem`
 
-- Check in the certificates into the `/certs` directory of this repository
+- Check these two files into the `/certs` directory.
+
+- Create a new Heroku project for this demo.
+
+```sh
+    % heroku create
+```
+
+Note the URL of the project you just created.
+
+- Push the code to Heroku
+
+```sh
+    % git push heroku master
+```
+
+- Run the `bootstrap` task (lib/rake/bootstrap.rb).  This creates the database and the default users.
+
+```sh
+    % heroku run bundle exec rake bootstrap
+```
+
+- Set the following Heroku environment variables.
+
+```sh
+    % heroku config:set RTCC_APP_ID=q7w4fktzzuf7
+    % heroku config:set RTCC_AUTH_URL=https://auth.rtccloud.net/auth/
+    % heroku config:set RTCC_CACERT=certs/authCA.crt
+    % heroku config:set RTCC_CERTPASSWORD=XnyexbUF
+    % heroku config:set RTCC_CLIENTCERT=certs/publicCert.pem
+    % heroku config:set RTCC_CLIENTCERT_KEY=certs/privateKey.pem
+    % heroku config:set RTCC_CLIENT_ID=e43cfcda02f45b39d347509d509817
+    % heroku config:set RTCC_CLIENT_SECRET=6011b6d3a2d64d77fb4086b44996bf
+    % heroku config:set CLOUDRECORDER_TOKEN=7e59b98c27331b82ef0e8fa9bfe37fcb
+```
 
 - Edit the `app.json` file and fix the following:
     - make sure the `repository` URL points to your clone of this repository
