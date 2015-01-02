@@ -1,3 +1,38 @@
+SightCall Communicator
+======================
+
+SightCall Communicator is a demonstration web-site that can be easily deployed to Heroku or your own servers.  Communicator demonstrates three real-time functions with a small roster of users.  The functions are:
+
+- one-to-one video and voice
+- multipary video-teleconference
+- text-chat
+
+SightCall Communicator has been created using common web technologies
+(Rails, Bootstrap, jQuery), and is purposely kept small.  Not only is
+it a showcase of SightCall technologies, it is a tutorial of
+best-practices and idioms to use when embedding SightCall features
+into your own site.
+
+## Run It On Heroku
+
+You can run your own instance of SightCall Communicator on Heroku in
+just a few minutes.
+
+- Clone this repository
+- If you have not already, you must request an API KEY from SightCall.  [http://www.sightcall.com/developers/](http://www.sightcall.com/developers/)
+- Unpack your `client.p12` file into its two components  (see instructions in [Ruby](https://github.com/weemo/Server-SDKs/tree/master/Ruby)).
+
+    - `privateKey.pem`
+    - `publicCert.pem`
+
+- Check in the certificates into the `/certs` directory of this repository
+- Press the 'Deploy To Heroku' button
+- 
+
+
+
+
+
 Tutorial: Build a Rails App with Weemo
 ================================================================
 
@@ -13,7 +48,6 @@ Rails site that is the same as the one checked in here.  In the
 tutorials, we'll give you some tests to run along the way to make sure
 the project is working.  However, if you follow the tutorial and get
 stuck, the reference code here can be used to get you back on track.
-
 ![Architecture](images/RailsTutorial01-Slide02.png "Rails App Using Weemo")
 
 In addition to using WebRTC in a browser, we are going to extend our
