@@ -18,17 +18,19 @@ into your own site.
 You can run your own instance of SightCall Communicator on Heroku in
 just a few minutes.
 
-- Clone this repository
+- Clone this repository so you can customize it.  Make your repo public.
 - If you have not already, you must request an API KEY from SightCall.  [http://www.sightcall.com/developers/](http://www.sightcall.com/developers/)
 - Unpack your `client.p12` file into its two components  (see instructions in [Ruby](https://github.com/weemo/Server-SDKs/tree/master/Ruby)).
 
     - `privateKey.pem`
     - `publicCert.pem`
 
+- Check in the certificates into the `/certs` directory of this repository
+
 - Edit the `app.json` file and fix the following:
     - make sure the `repository` URL points to your clone of this repository
+    - edit the
     
-- Check in the certificates into the `/certs` directory of this repository
 - Press the 'Deploy To Heroku' button
 - 
 

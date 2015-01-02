@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   end
 
   def rtcc_domain
-    "tsheffler.wauth16"
+    "yourdomain.com"
   end
 
 
