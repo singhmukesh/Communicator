@@ -21,11 +21,11 @@
         "RTCC_APP_ID" : "<< your APP_ID here >>",
         "RTCC_AUTH_URL" : "https://auth.rtccloud.net/auth/",
         "RTCC_CACERT" : "certs/authCA.crt",
-        "RTCC_CERTPASSWORD" : "<< your CERT PASSWORD  here>>",
+        "RTCC_CERTPASSWORD" : "<< your CERT PASSWORD  here >>",
         "RTCC_CLIENTCERT" : "certs/publicCert.pem",
         "RTCC_CLIENTCERT_KEY" : "certs/privateKey.pem",
-        "RTCC_CLIENT_ID" : "<< your CLIENT ID here>>",
+        "RTCC_CLIENT_ID" : "<< your CLIENT ID here >>",
         "RTCC_CLIENT_SECRET" : "<< your CLIENT SECRET here >>",
         "CLOUDRECORDER_TOKEN" : ""
-    },
+    }
 }
