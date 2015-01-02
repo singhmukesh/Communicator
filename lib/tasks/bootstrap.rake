@@ -3,7 +3,7 @@
 desc "Build the default users and database"
 task :bootstrap => :environment do
 
-  Rake::Task["db:migrate""].invoke
+  Rake::Task["db:migrate"].invoke
 
   User.new(:name => "bob", :password => "bobpassword").save
   User.new(:name => "sue", :password => "sudpassword").save
