@@ -2,8 +2,9 @@
 
 <div class="container well">
 
-  <div id="video-container" class="rtccWebRTCControls" style="width:322px; height:182px; background:#0074bc; border: 1px solid black; display:none">
+  <div id="video-container" class="rtccWebRTCControls" style="width:322px; height:182px; background:#ffffff; border: 1px solid black; display:none">
     <%= image_tag("Girl_with_a_Pearl_Earring.jpg", size: "320x180", style: "position:absolute") %>
+    <%#= image_tag("SightCall_Logo.png", size: "320x180", style: "position:absolute") %>
   </div>
 
   <div class="col-sm-2 pull-right">
@@ -394,8 +395,9 @@
      var win = window.open("/chat?uid=" + euid, "chat window" + euid, "width=400,height=300,status=no,toolbar=no,menubar=no,location=0");
 
      if (win == null || typeof(win) == 'undefined') {
-       alert("Please disable your pop-up blocker on this site.  Chat windows use pop-ups.");
+       alert("Please disable your pop-up blocker on this site and re-load the page.  Chat windows use pop-ups.");
      }
+
      return win;
    }
 
