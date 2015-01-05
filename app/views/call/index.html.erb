@@ -392,6 +392,10 @@
      // Each UID has its own chat window
      var euid = encodeURIComponent(uid);
      var win = window.open("/chat?uid=" + euid, "chat window" + euid, "width=400,height=300,status=no,toolbar=no,menubar=no,location=0");
+
+     if (win == null || typeof(win) == 'undefined') {
+       alert("Please disable your pop-up blocker on this site.  Chat windows use pop-ups.");
+     }
      return win;
    }
 
