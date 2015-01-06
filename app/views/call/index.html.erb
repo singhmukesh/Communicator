@@ -372,7 +372,7 @@
    var testwin = window.open("/chat?uid=foo", "testpopupwindow", "width=400,height=300,status=no,toolbar=no,menubar=no,location=0");
 
    if (testwin == null || typeof(testwin) == 'undefined') {
-     alert("Please disable your pop-up blocker for this site.  Then logout and login again. Chat windows use pop-ups.");
+     alert("Please disable your pop-up blocker for this site.  Then logout and login again. Chat windows require pop-ups.");
    }
    else {
      testwin.close();

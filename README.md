@@ -5,7 +5,7 @@ SightCall Communicator is a demonstration web application showcasing real-time c
 Communicator demonstrates three real-time services and shows how to implement them using the SightCall platform.
 
 - one-to-one video and voice
-- multipary video-teleconference
+- multiparty video-teleconference
 - text-chat
 
 SightCall Communicator has been created using common web technologies
@@ -133,4 +133,30 @@ it to your Communicator project this way.
 ```
 
 
+## Customize It
+
+Most of this single-page application is defined in a single file:
+`app/views/call/index.html.erb`.  The page elements and their layout is
+defined using Twitter Bootstrap classes.
+
+The main page layout is defined in
+`app/views/layout/application.html.erb`.  This is the file that
+defines the navigation header and application name.  The real-time
+platform is defined by a `span` named "rtccConnectionStatus", and the
+classes applied to this `span` are defined in
+`app/assets/stylesheets/application.css`.  This is where the red "X"
+(\2713) and green "Checkmark" (\2716) are defined.
+
+The SightCall user definitions are in file `app/model/user.rb`.  Edit
+this file to change user profiles or the logic that selects their domain.
+
+
+## Reusable Components
+
+A few small Javascript classes are defined in
+`app/assets/javascripts`.  The `chat_manager` takes care of sending
+and receiving chat messages, and routing them to the right window for
+display.  The `cloudrecorder_manager` wraps the Ajax calls to the
+proxy methods of the CloudRecorder.  The proxy methods themselves are
+defined in `app/controllers/cloudrecorder_controller.rb`.
 
