@@ -139,11 +139,11 @@ Most of this single-page application is defined in a single file:
 `app/views/call/index.html.erb`.  The page elements and their layout
 is defined using Twitter Bootstrap classes.  All of the Javascript
 implementing Communicator is defined in this one file, with the
-exception of a few reusable classes in `app/assets/javascripts`'
+exception of a few reusable classes in `app/assets/javascripts`.
 
 The main page layout is defined in
 `app/views/layout/application.html.erb`.  This is the file that
-defines the navigation header and application name.  Online connection is also defined here.
+defines the navigation header and application name.  Online connection status is also defined here.
 
 The SightCall user definitions are in file `app/model/user.rb`.  Edit
 this file to change user profiles (SightCall 'premium' versus 'standard') or the
@@ -154,7 +154,7 @@ logic that selects their domain ('yourdomain.com').
 
 This project is both an example and a tutorial for developers with easy to read Javascript.
 
-### Check your online status.
+### Check your online status
 
 A green check-mark means you're ready to go and the you are connected
 to the SightCall Realtime Platform.  For developers, see how to
@@ -179,12 +179,12 @@ Press the `Begin Hosting` button to set up an ad-hoc conference call.
 For each contact you would like to invite, select them from the list
 and press the `Invite` button.  SightCall's signaling platform
 notifies each invitee and Communicator will display an alert asking
-them to joint the conference.
+them to join the conference.
 
 
 <img src="images/CommunicatorConference.png" width="200px" />
 
-### Use Text Chat
+### Use text chat
 
 Select a contact and press the `Chat` button to begin a text chat.
 SightCall's real-time platform handles chat messaging.  Communicator
