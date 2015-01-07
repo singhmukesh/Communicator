@@ -9,10 +9,10 @@ Communicator demonstrates three real-time services and shows how to implement th
 - text-chat
 
 SightCall Communicator has been created using common web technologies
-(Rails, Bootstrap, jQuery), and is purposely kept small.  Not only is
-it a showcase of SightCall technologies, it is a tutorial of
-best-practices and idioms to use when embedding SightCall features
-into your own site.
+(Rails, Bootstrap, jQuery), and is purposely kept small so that it can
+serve as a starting point.  It is not only a showcase of SightCall
+technologies, it is also a tutorial of best-practices and idioms to use
+when embedding SightCall features into your own site.
 
 Communicator is easy to clone and run on your own servers, or you can
 try it out by deploying on Heroku.  (Even a free/hobby account will
@@ -108,7 +108,7 @@ calls and using text chat.
 
 ## Provision additional Users
 
-This little web application does not have an administrator interface, so you use the command
+This little web application does not have an administrator interface, so you can use the command
 line interface with the Rails console to manipulate its database.
 
 You can add users like this.
@@ -136,19 +136,62 @@ it to your Communicator project this way.
 ## Customize It
 
 Most of this single-page application is defined in a single file:
-`app/views/call/index.html.erb`.  The page elements and their layout is
-defined using Twitter Bootstrap classes.
+`app/views/call/index.html.erb`.  The page elements and their layout
+is defined using Twitter Bootstrap classes.  All of the Javascript
+implementing Communicator is defined in this one file, with the
+exception of a few reusable classes in `app/assets/javascripts`'
 
 The main page layout is defined in
 `app/views/layout/application.html.erb`.  This is the file that
-defines the navigation header and application name.  The real-time
-platform is defined by a `span` named "rtccConnectionStatus", and the
-classes applied to this `span` are defined in
-`app/assets/stylesheets/application.css`.  This is where the red "X"
-(\2713) and green "Checkmark" (\2716) are defined.
+defines the navigation header and application name.  Online connection is also defined here.
 
 The SightCall user definitions are in file `app/model/user.rb`.  Edit
-this file to change user profiles or the logic that selects their domain.
+this file to change user profiles (SightCall 'premium' versus 'standard') or the
+logic that selects their domain ('yourdomain.com').
+
+
+## User Manual
+
+This project is both an example and a tutorial for developers with easy to read Javascript.
+
+### Check your online status.
+
+A green check-mark means you're ready to go and the you are connected
+to the SightCall Realtime Platform.  For developers, see how to
+implement this in your own application using the Javascript
+`onConnectionHandler`.
+
+<img src="images/CommunicatorConnectionStatus.png" width="200px" />
+
+
+### Make a one to one call
+
+Select one of your contacts and initiate a one-to-one call.
+SightCall's signaling platform notifies your contact and Communicator
+puts up an alert asking them to answer the call.
+
+<img src="images/CommunicatorFront.png" width="200px" />
+
+
+### Set up a multiparty conference call
+
+Press the `Begin Hosting` button to set up an ad-hoc conference call.
+For each contact you would like to invite, select them from the list
+and press the `Invite` button.  SightCall's signaling platform
+notifies each invitee and Communicator will display an alert asking
+them to joint the conference.
+
+
+<img src="images/CommunicatorConference.png" width="200px" />
+
+### Use Text Chat
+
+Select a contact and press the `Chat` button to begin a text chat.
+SightCall's real-time platform handles chat messaging.  Communicator
+shows how to use pop-up windows to keep each conversation in a
+separate window.  (Please disable your pop-up blocker!)
+
+<img src="images/CommunicatorChat.png" width="200px" />
 
 
 ## Reusable Components

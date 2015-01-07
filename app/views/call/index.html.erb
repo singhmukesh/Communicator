@@ -206,6 +206,11 @@
          $(".rtccConnectionActive").attr("disabled", "disabled");
          break;
 
+       case 'dropped':
+         $(".rtccConnectionStatus").removeClass("connected")
+         $(".rtccConnectionActive").attr("disabled", "disabled");
+         break;
+
        case 'loggedasotheruser':
          setTokenAndAuthenticate("/rtcc/callback");
          break;
