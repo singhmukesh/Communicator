@@ -176,22 +176,22 @@
      switch(message) {
 
        case 'connectedRtccDriver':
-         $(".rtccConnectionStatus").addClass("connected")
+         $(".rtccConnectionStatus").attr("status", "online");
          break; 
 
        case 'connectedWebRTC':
-         $(".rtccConnectionStatus").addClass("connected")
+         $(".rtccConnectionStatus").attr("status", "online");
          $(".rtccWebRTCControls").show();
          break;
 
        case 'disconnectedRtccDriver':
-         $(".rtccConnectionStatus").removeClass("connected")
+         $(".rtccConnectionStatus").attr("status", "offline");
          $(".rtccConnectionActive").attr("disabled", "disabled");
          setTokenAndAuthenticate("/rtcc/callback");
          break;
 
        case 'disconnectedWebRTC':
-         $(".rtccConnectionStatus").removeClass("connected")
+         $(".rtccConnectionStatus").attr("status", "offline");
          $(".rtccConnectionActive").attr("disabled", "disabled");
          setTokenAndAuthenticate("/rtcc/callback");
          break;
@@ -207,7 +207,7 @@
          break;
 
        case 'dropped':
-         $(".rtccConnectionStatus").removeClass("connected")
+         $(".rtccConnectionStatus").attr("status", "alert");
          $(".rtccConnectionActive").attr("disabled", "disabled");
          break;
 

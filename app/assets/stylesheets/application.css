@@ -40,13 +40,27 @@ th { border-bottom: 1px solid #DDD; }
  * ToDo: find nice icons
  */
 
-.rtccConnectionStatus.connected:after {
-    color: lightgreen;
-    content: "\2713" /* check */
-}
-
-.rtccConnectionStatus:after {
+.rtccConnectionStatus[status=]:after {
     color: red;
     content: "\2716"; /* red X */
 }
-   
+
+.rtccConnectionStatus[status=online]:after {
+    color: lightgreen;
+    content: "\2713" /* Check */
+}    
+
+.rtccConnectionStatus[status=offline]:after {
+    color: red;
+    content: "\2716"; /* red X */
+}    
+
+.rtccConnectionStatus[status=unknown]:after {
+    color: red;
+    content: "??" /* question mark */
+}    
+
+.rtccConnectionStatus[status=alert]:after {
+    color: red;
+    content: "!!" /* Exclamation */
+}    
