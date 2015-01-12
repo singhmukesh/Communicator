@@ -7,98 +7,71 @@
     <%#= image_tag("SightCall_Logo.png", size: "320x180", style: "position:absolute") %>
   </div>
 
-  <div class="col-sm-2 pull-right">
-    <button disabled class="rtccCallActive btn btn-large btn-primary btn-block" onclick="hangup()">Hangup</button>
-  </div>
+</div>
+
+<div class="container well">
+
+  <h3>Chat / Call</h3>
+
+  <table class="table table-condensed table-striped">
+    <thead>
+    </thead>
+
+    <tbody>
+      <% @friends.each do |friend| %>
+        <tr>
+          <td> <%= friend.name %> </td>
+          <td> <span class="rtccPresenceStatus" status="unknown" rtccUid="<%= friend.rtcc_uid %>"> </span> </td>
+          <td>
+            <button disabled class="rtccConnectionActive btn btn-xs" onclick="chatFriend('<%= friend.rtcc_uid %>')">Chat</button>
+            <button disabled class="rtccConnectionActive btn btn-xs" onclick="callFriend('<%= friend.rtcc_uid %>')">Call</button>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 </div>
 
 <div class="container well">
 
-  <div role="tabpanel">
+  <h3>Conference</h3>
 
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#call" aria-controls="call" role="tab" data-toggle="tab">Call</a></li>
-      <li role="presentation"><a href="#conference" aria-controls="conference" role="tab" data-toggle="tab">Conference</a></li>
-      <li role="presentation"><a href="#chat" aria-controls="chat" role="tab" data-toggle="tab">Chat</a></li>
-    </ul>
+  <!-- TAB CONFERENCE -->
+  <div role="tabpanel" class="tab-pane" id="conference">
+    <br>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <div class="col-sm-4">
+          <button id="host_button" disabled class="rtccConnectionActive btn btn-large btn-primary" disabled onclick="createMeetingPoint()">Begin Hosting</button>
+        </div>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-
-      <!-- TAB CALL -->
-      <div role="tabpanel" class="tab-pane active" id="call">
-        <br>
-        <div class="form-horizontal">
-          <div class="form-group">
-            <label for="call_friend" class="col-sm-1 control-label">Friend:</label>
-            <div class="col-sm-3">
-              <%= select_tag("call_friend", options_from_collection_for_select(@friends, 'rtcc_uid', 'name'), {id: "call_friend_select", class: "form-control"}) %>
-            </div>
-            <div class="col-sm-2">
-              <button id="call_button" disabled class="rtccConnectionActive btn btn-large btn-primary btn-block" onclick="call()">Call</button>
-            </div>
-          </div>
+        <div class="col-sm-2">
+          <button id="recording_start_button" disabled class="rtccCallActive btn btn-large" onclick="newRecording()" >Record Start</button>
+        </div>
+        <div class="col-sm-2">
+          <button id="recording_stop_button" disabled class="rtccCallActive btn btn-large" onclick="stopRecording()" >Record Stop</button>
+        </div>
+        <div class="col-sm-2">
+          <span id="recording_counter" style="color:red"></span>
+        </div>
+        <div class="col-sm-3">
+          <span id="recording_results"></span>
         </div>
       </div>
 
-      <!-- TAB CONFERENCE -->
-      <div role="tabpanel" class="tab-pane" id="conference">
-        <br>
-        <div class="form-horizontal">
-          <div class="form-group">
-            <div class="col-sm-3">
-              <button id="host_button" disabled class="rtccConnectionActive btn btn-large btn-primary btn-block" disabled onclick="createMeetingPoint()">Begin Hosting</button>
-            </div>
+      <div class="form-group">
 
-            <div class="col-sm-2">
-              <button id="recording_start_button" disabled class="rtccCallActive btn btn-large" onclick="newRecording()" >Record Start</button>
-            </div>
-            <div class="col-sm-2">
-              <button id="recording_stop_button" disabled class="rtccCallActive btn btn-large" onclick="stopRecording()" >Record Stop</button>
-            </div>
-            <div class="col-sm-2">
-              <span id="recording_counter" style="color:red"></span>
-            </div>
-            <div class="col-sm-3">
-              <span id="recording_results"></span>
-            </div>
-          </div>
-
-          <div class="form-group">
-
-            <label for="conf_friend" class="col-sm-1 control-label">Friend:</label>
-            <div class="col-sm-3">
-              <%= select_tag("conf_friend", options_from_collection_for_select(@friends, 'rtcc_uid', 'name'), {id: "conf_friend_select", class: "form-control"}) %>
-            </div>
-            <div class="col-sm-2">
-              <button id="invite_button" disabled class="rtccCallActive btn btn-large btn-primary btn-block" onclick="invite()">Invite</button>
-            </div>
-          </div>
+        <label for="conf_friend" class="col-sm-1 control-label">Friend:</label>
+        <div class="col-sm-3">
+          <%= select_tag("conf_friend", options_from_collection_for_select(@friends, 'rtcc_uid', 'name'), {id: "conf_friend_select", class: "form-control"}) %>
         </div>
-      </div>
-
-      <!-- TAB CHAT -->
-      <div role="tabpanel" class="tab-pane" id="chat">
-        <br>
-        <div class="form-horizontal">
-          <div class="form-group">
-            <label for="chat_friend" class="col-sm-1 control-label">Friend:</label>
-            <div class="col-sm-3">
-              <%= select_tag("chat_friend", options_from_collection_for_select(@friends, 'rtcc_uid', 'name'), {id: "chat_friend_select", class: "form-control"}) %>
-            </div>
-            <div class="col-sm-2">
-              <button id="chat_button" disabled class="rtccConnectionActive btn btn-large btn-primary btn-block" onclick="chat()">Chat</button>
-            </div>
-          </div>
+        <div class="col-sm-2">
+          <button id="invite_button" disabled class="rtccCallActive btn btn-large btn-primary" onclick="invite()">Invite</button>
         </div>
       </div>
     </div>
-
   </div>
-
-
 
 </div>
 
@@ -214,6 +187,12 @@
        case 'loggedasotheruser':
          setTokenAndAuthenticate("/rtcc/callback");
          break;
+
+       case 'presenceOkNewUser':
+         rtcc.setMyPresence(1);
+         launchPresence();
+         break;
+                            
      }
    }
      
@@ -313,6 +292,9 @@
      }
    };
 
+   rtcc.onBurstUpdate = onBurstUpdate;
+   rtcc.onPresenceUpdate = onPresenceUpdate;
+
    rtcc.initialize();
  }
 
@@ -323,6 +305,10 @@
  function call() {
    var friendUid = $("#call_friend_select").val()
    console.log(["call", friendUid]);
+   rtcc.createCall(friendUid, 'internal', "<%= current_user.name %>");
+ }
+
+ function callFriend(friendUid) {
    rtcc.createCall(friendUid, 'internal', "<%= current_user.name %>");
  }
 
@@ -356,6 +342,11 @@
 
  function chat() {
    var friendUid = $("#chat_friend_select").val();
+   console.log(["chat", friendUid]);
+   var win = findChatWindow(friendUid);
+ }
+
+ function chatFriend(friendUid) {
    console.log(["chat", friendUid]);
    var win = findChatWindow(friendUid);
  }
@@ -441,6 +432,65 @@
      return win;
    }
  }
+
+ ////////////////////////////////////////////////////////////////
+ //
+ // Presence: get a list of friends to watch
+ //
+
+ function getFriends(success, failure) {
+   $.ajax({
+     type: "GET",
+     url: "<%= url_for :controller => :call, :action => :friends %>",
+     cache: false,
+     dataType: "JSON"
+   }).success(function(data) {
+     console.log(["getFriends Success", data]);
+     success(data);
+   }).error(function(e) {
+     console.log(["getFriends error", e]);
+     failure(e);
+   });
+ }
+
+ function launchPresence() {
+   getFriends(
+     // success
+     function(data) {
+       var friends = data["friends"];
+       var uids = friends.map(function(currentValue) { return currentValue.rtcc_uid; });
+       console.log(["uids", uids]);
+       rtcc.getPresence(uids); // initial state
+       rtcc.rosterAdd(uids);  // incremental updates
+     },
+     //failure
+     function(e) {
+     }
+   )
+ }
+
+ function onBurstUpdate(uids) {
+   for (var i=0; i < uids.length; i++) {
+     console.log(["i", i]);
+     var uid = uids[i].uid;
+     var presence = uids[i].presence;
+     var selector = ".rtccPresenceStatus[rtccUid=" + uid + "]";
+     var status = null;
+     if (presence == 0) {
+       status = "offline";
+     }
+     else if (presence == 1) {
+       status = "online";
+     }
+     else {
+       status = "unknown";
+     };
+     $(selector).attr("status", status);
+   }
+ }
+
+ var onPresenceUpdate = onBurstUpdate; // same function
+              
 
  ////////////////////////////////////////////////////////////////
  //
@@ -542,6 +592,15 @@
 
    // Make sure our page allows popups for the text chat feature
    testPopupWindow();
+
+   // Get my list of friends
+   getFriends(
+     function(f) {
+       console.log(["my friends", f["friends"]]);
+     },
+     function(e) {
+     }
+   );
 
    // Initialize the cloudrecorder manager with the URLs of our proxy
    rtccCloudrecorderManager = new CloudrecorderManager(

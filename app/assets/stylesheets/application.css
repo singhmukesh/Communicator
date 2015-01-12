@@ -64,3 +64,27 @@ th { border-bottom: 1px solid #DDD; }
     color: red;
     content: "!!" /* Exclamation */
 }    
+
+/*
+ * RTCC Presence - usually customized extensively by application
+ */
+
+.rtccPresenceStatus[status=online]:after {
+    color: lightgreen;
+    content: "\2713" /* Check */
+}    
+
+.rtccPresenceStatus[status=offline]:after {
+    color: red;
+    content: "\2716"; /* red X */
+}    
+
+.rtccPresenceStatus[status=unknown]:after {
+    color: orange;
+    content: "\25C9"; /* fisheye */
+}    
+
+.rtccPresenceStatus[status=alert]:after {
+    color: red;
+    content: "\27A4"; /* black rightwards arrowhead */
+}    
