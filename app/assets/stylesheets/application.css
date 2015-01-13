@@ -40,11 +40,6 @@ th { border-bottom: 1px solid #DDD; }
  * ToDo: find nice icons
  */
 
-.rtccConnectionStatus[status=]:after {
-    color: red;
-    content: "\2716"; /* red X */
-}
-
 .rtccConnectionStatus[status=online]:after {
     color: lightgreen;
     content: "\2713" /* Check */
