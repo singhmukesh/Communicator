@@ -2,6 +2,9 @@
 // A Chat Manager interfaces with RTCC to send and receive messages from the current
 // user to one specific other user.
 //
+// A client of a chat manager can register for the onUpdate function.
+//    chat_manager.onUpdate = function(is_received) { };
+//
 // Sheffler
 // Dec 2014
 //
@@ -22,9 +25,6 @@ function ChatManager(rtcc, myUid, uid) {
 
   // Emit an event that our display needs updating
   function notifyUpdate(is_received) {
-
-    console.log(["chat:notifyUpdate"]);
-    console.log(["chat:notifyUpdate", that]);
 
     if (typeof(that.onUpdate) == "function") {
       console.log(["chat:notifyUpdate", that, that.onUpdate]);
@@ -51,14 +51,11 @@ function ChatManager(rtcc, myUid, uid) {
     notifyUpdate(true);
   }
 
-  // A chat will be rendered in a window
-  this.win = null;
-
   // Send a message
   function sendMessage(msg) {
     appendSent(msg);
     var jdata = JSON.stringify([myUid, msg]);
-    rtcc.sendDataChannelMessage(uid, jdata);
+    rtcc.sendMessage(0, uid, msg);
   }
 
   // Get the current state of the messages for display in HTML
