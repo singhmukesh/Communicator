@@ -3,8 +3,14 @@ class User < ActiveRecord::Base
   # Make :password a virtual attribute of the database
   attr_accessor :password
 
+  @@secret = "a secret phrase"
+
   def rtcc_uid
-    "#{name}-uid"
+    # "#{name}-uid"
+
+    # a unique UID of safe characters
+    # Digest::SHA1.hexdigest("#{name}" + "secret")
+    Digest::SHA1.hexdigest("#{name}" + @@secret).to_i(16).to_s(36)
   end
 
   def rtcc_profile

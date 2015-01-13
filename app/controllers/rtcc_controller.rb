@@ -16,17 +16,9 @@ class RtccController < ApplicationController
       obj = { "error" => 500, "error_description" => "unauthenticated user" }
     end
 
-    logger.debug "RTCC#callback #{obj}"
+    # logger.debug "RTCC#callback #{obj}"
 
     render :json => obj
   end
 
-  def csrftest
-      obj = @client.auth("csrftestuser",
-                         "tsheffler.wauth9",
-                         "premium")
-    logger.debug "RTCC#csrftest #{obj}"
-
-    render :json => obj
-  end
 end

@@ -1,22 +1,27 @@
 SightCall Communicator
 ======================
 
-SightCall Communicator is a demonstration web application showcasing real-time communications for a small workgroup.
-Communicator demonstrates three real-time services and shows how to implement them using the SightCall platform.
+SightCall Communicator is a **reference implementation** for a web
+application showcasing real-time communications for a small workgroup.
+Communicator demonstrates real-time services and shows how to
+layer them onto a base web application using the SightCall platform.
 
 - one-to-one video and voice
 - multiparty video-teleconference
 - text-chat
+- presence
+- recording (optional)
 
 SightCall Communicator has been created using common web technologies
 (Rails, Bootstrap, jQuery), and is purposely kept small so that it can
-serve as a starting point.  It is not only a showcase of SightCall
-technologies, it is also a tutorial of best-practices and idioms to use
-when embedding SightCall features into your own site.
+serve as a starting point for a complete project.  It is not only a
+showcase of SightCall technologies, it is also a tutorial of
+best-practices and idioms to use for embedding SightCall features into
+your own site.
 
 Communicator is easy to clone and run on your own servers, or you can
-try it out by deploying on Heroku.  (Even a free/hobby account will
-suffice.)  Read on.
+try it out by deploying on Heroku.  (Even a free/hobby account on
+Heroku will suffice.)  Read on.
 
 <img src="images/CommunicatorFront.png" width="75%" />
 
@@ -71,7 +76,10 @@ Note the URL of the project you just created.  (E.g. https://adjective-noun-1234
     % git push heroku master
 ```
 
-- Run the `bootstrap` task (in file lib/rake/bootstrap.rb).  This creates the database and the default users.
+- Run the `bootstrap` task (in file lib/rake/bootstrap.rb).  This
+  creates the database and the default users.  If you would like to
+  customize the default users, you can edit the task before you invoke
+  it.
 
 ```sh
     % heroku run bundle exec rake bootstrap

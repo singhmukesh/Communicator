@@ -9,6 +9,7 @@ Simplelogin::Application.routes.draw do
   post "auth/login"
   get "auth/logout"
   get "call/index"
+  get "call/friends"
   post "rtcc/callback"
 
   get "multiparty/host"

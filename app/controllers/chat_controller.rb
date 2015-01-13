@@ -13,6 +13,11 @@ class ChatController < ApplicationController
     @friends = User.all.select{ |u| u.rtcc_uid == params[:uid] }
     @friend = @friends[0]
 
+    # make a pseudo-friend if none found, just to simplify layout.  It is not persisted
+    if not @friend
+      @friend = User.new({:name => "no one", :password => "no password"})
+    end
+
     render :layout => "chat_layout"
   end
 

@@ -48,7 +48,7 @@ class RTCCAuth
     http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
     # Never enable this debugging statement in production, but it is helpful for debug
-    http.set_debug_output $stderr
+    # http.set_debug_output $stderr
 
     # Add the CA certs
     store = OpenSSL::X509::Store.new
