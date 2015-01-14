@@ -6,10 +6,7 @@ class User < ActiveRecord::Base
   @@secret = "a secret phrase"
 
   def rtcc_uid
-    # "#{name}-uid"
-
     # a unique UID of safe characters
-    # Digest::SHA1.hexdigest("#{name}" + "secret")
     Digest::SHA1.hexdigest("#{name}" + @@secret).to_i(16).to_s(36)
   end
 
