@@ -1,0 +1,88 @@
+/*
+ * RTCC Connection Status DIV style
+ */
+
+.rtccConnectionStatus[status=online] {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px; 
+    background-color: #00DB00; /* greenLight */
+    display: inline-block;
+}    
+
+.rtccConnectionStatus[status=offline] {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px; 
+    background-color: #EF2F2F; /* redLight */
+    display: inline-block;
+}    
+
+.rtccConnectionStatus[status=unknown] {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px; 
+    background-color: gold;
+    display: inline-block;
+}    
+
+.rtccConnectionStatus[status=alert] {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px; 
+    background-color: blue;
+    display: inline-block;
+}    
+
+/*
+ * RTCC Presence DIV style
+ */
+
+.rtccPresenceStatus[status=online] {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px; 
+    background-color: #00DB00; /* greenLight */
+    display: inline-block;
+}    
+
+.rtccPresenceStatus[status=offline] {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px; 
+    background-color: #EF2F2F; /* redLight */
+    display: inline-block;
+}    
+
+.rtccPresenceStatus[status=unknown] {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px; 
+    background-color: gold;
+    display: inline-block;
+}    
+
+.rtccPresenceStatus[status=alert] {
+    width: 12px;
+    height: 12px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px; 
+    background-color: blue;
+    display: inline-block;
+}    
+
