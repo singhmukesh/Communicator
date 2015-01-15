@@ -13,7 +13,7 @@
  */
 
 body { padding-top: 100px; }
-footer { margin-top: 100px; }
+footer { margin-top: 50px; }
 table, td, th { vertical-align: middle; border: none; }
 th { border-bottom: 1px solid #DDD; }
 
@@ -35,51 +35,3 @@ th { border-bottom: 1px solid #DDD; }
   @extend .error;
  }
 
-/*
- * RTCC Connection Status is handled by styles
- * ToDo: find nice icons
- */
-
-.rtccConnectionStatus[status=online]:after {
-    color: lightgreen;
-    content: "\2713" /* Check */
-}    
-
-.rtccConnectionStatus[status=offline]:after {
-    color: red;
-    content: "\2716"; /* red X */
-}    
-
-.rtccConnectionStatus[status=unknown]:after {
-    color: red;
-    content: "??" /* question mark */
-}    
-
-.rtccConnectionStatus[status=alert]:after {
-    color: red;
-    content: "!!" /* Exclamation */
-}    
-
-/*
- * RTCC Presence - usually customized extensively by application
- */
-
-.rtccPresenceStatus[status=online]:after {
-    color: lightgreen;
-    content: "\2713" /* Check */
-}    
-
-.rtccPresenceStatus[status=offline]:after {
-    color: red;
-    content: "\2716"; /* red X */
-}    
-
-.rtccPresenceStatus[status=unknown]:after {
-    color: orange;
-    content: "\25C9"; /* fisheye */
-}    
-
-.rtccPresenceStatus[status=alert]:after {
-    color: red;
-    content: "\27A4"; /* black rightwards arrowhead */
-}    
