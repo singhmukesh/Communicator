@@ -51,13 +51,14 @@ var CloudrecorderManager = function(createurl, detailurl) {
   // createurl - the cloud recorder 'create' method on the proxy server
   // detailurl - the cloud recoder 'get ID' method on the proxy server
 
-  function create(success, failure) {
+  function create(title, success, failure) {
     if (that.debug == true) {
       console.log(["CloudrecorderManager: POST"]);
     }
     $.ajax({
       type: "POST",
       url: createurl,
+      data: { "title" : title },
       cache: false,
       dataType: "JSON"
     }).success(function(jdata) {

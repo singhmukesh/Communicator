@@ -16,7 +16,7 @@ class CloudrecorderController < ApplicationController
   def recording
     if CLOUDRECORDER_TOKEN
       begin
-        response = RestClient.post("#{CLOUDRECORDER_BASE}/recordings", { }, 'authorization' => "Token token=#{CLOUDRECORDER_TOKEN}")
+        response = RestClient.post("#{CLOUDRECORDER_BASE}/recordings", { :title => params[:title]  }, 'authorization' => "Token token=#{CLOUDRECORDER_TOKEN}")
         jdata = JSON.parse(response.body)
         # puts "J:#{jdata}"
         render :json => {
@@ -48,6 +48,7 @@ class CloudrecorderController < ApplicationController
       # return only those fields necessary ?
       render :json => {
         :id => jdata["id"],
+        :title => jdata["title"],
         :status => jdata["status"],
         :webm_duration => jdata["webm_duration"],
         :webm_s3url => jdata["webm_s3url"],
