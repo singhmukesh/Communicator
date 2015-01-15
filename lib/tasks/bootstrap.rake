@@ -9,6 +9,6 @@ task :bootstrap => :environment do
   User.new(:name => "sue", :password => "suepassword").save
   User.new(:name => "tim", :password => "timpassword").save
   User.new(:name => "pat", :password => "patpassword").save
-  User.new(:name => "bono@gmail.com", :password => "bonopassword").save
+  User.new(:name => "john", :password => "johnpassword").save
 end
 
