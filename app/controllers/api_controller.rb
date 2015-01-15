@@ -53,7 +53,7 @@ class ApiController < ApplicationController
 
   def friends
     @me = current_user
-    @friends = User.all.select{ |u| u != @me }
+    @friends = User.where('id <> ?', @me.id).order(:name => :asc)
 
     friends = @friends.map do |f|
       { "name" => f.name, "rtcc_uid" => f.rtcc_uid }
