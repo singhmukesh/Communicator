@@ -12,7 +12,7 @@
 //
 
 // The UPLOAD URL on the actual cloud-recorder (not the local proxy)
-var CLOUDRECORDER_UPLOAD_URL = "https://recording.weemo.com/api/recordings/upload";
+var CLOUDRECORDER_UPLOAD_URL = "https://recording.sightcall.com/api/recordings/upload";
 
 
 var CloudrecorderRecording = function(jdata) {

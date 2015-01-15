@@ -5,7 +5,7 @@
 # CLOUDRECORDER_TOKEN = "7e59b98c27331b82ef0e8fa9bfe37fcb" # production (rds postgres 9.3.3)
 
 # The cloudrecorder base is usually fixed
-CLOUDRECORDER_BASE = "https://recording.weemo.com/api"
+CLOUDRECORDER_BASE = "https://recording.sightcall.com/api"
 
 class CloudrecorderController < ApplicationController
 
