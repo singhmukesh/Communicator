@@ -3,8 +3,10 @@ SightCall Communicator
 
 SightCall Communicator is a **reference implementation** for a web
 application showcasing real-time communications for a small workgroup.
-Communicator demonstrates real-time services and shows how to
-layer them onto a base web application using the SightCall platform.
+It is implemented as essentially a
+[Single-Page Web-Application](http://en.wikipedia.org/wiki/Single-page_application).
+Communicator demonstrates real-time services and shows how to layer
+them onto a base web application using the SightCall platform.
 
 - one-to-one video and voice
 - multiparty video-teleconference
@@ -13,17 +15,18 @@ layer them onto a base web application using the SightCall platform.
 - recording (optional)
 
 SightCall Communicator has been created using common web technologies
-(Rails, Bootstrap, jQuery), and is purposely kept small so that it can
-serve as a starting point for a complete project.  It is not only a
-showcase of SightCall technologies, it is also a tutorial of
-best-practices and idioms to use for embedding SightCall features into
-your own site.
+([Rails](http://rubyonrails.org/),
+[Bootstrap](http://getbootstrap.com), [jQuery](http://jquery.com/)),
+and is purposely kept small so that it can serve as a starting point
+for a complete project.  It is not only a showcase of SightCall
+technologies, it is also a tutorial of best-practices and idioms to
+use for embedding SightCall features into your own site.
 
 Communicator is easy to clone and run on your own servers, or you can
-try it out by deploying on Heroku.  (Even a free/hobby account on
+try it out by deploying on [Heroku](http://heroku.com).  (Even a free/hobby account on
 Heroku will suffice.)  Read on.
 
-<img src="images/CommunicatorFront.png" width="75%" />
+<img src="images/CommunicatorFullOrig.png" width="75%" />
 
 
 ## Run It On Heroku
@@ -108,10 +111,10 @@ one of the other pre-defined users and test making and receiving video
 calls and using text chat.
 
 - bob / bobpassword
+- john / johnpassword
+- pat / patpassword
 - sue / suepassword
 - tim / timpassword
-- pat / patpassword
-- bono@gmail.com / bonopassword
 
 
 ## Provision additional Users
@@ -143,63 +146,74 @@ it to your Communicator project this way.
 
 ## Customize It
 
-Most of this single-page application is defined in a single file:
-`app/views/call/index.html.erb`.  The page elements and their layout
-is defined using Twitter Bootstrap classes.  All of the Javascript
-implementing Communicator is defined in this one file, with the
-exception of a few reusable classes in `app/assets/javascripts`.
+Most of this single-page application is defined in the file:
+`app/views/call/index.html.erb`.  The elements of the page and their
+layout is defined using Twitter Bootstrap classes.  All of the
+Javascript implementing Communicator is defined in this one file, with
+the exception of a few reusable classes in `app/assets/javascripts`.
 
-The main page layout is defined in
-`app/views/layout/application.html.erb`.  This is the file that
-defines the navigation header and application name.  Online connection status is also defined here.
+The page layout is defined in `app/views/layout/application.html.erb`.
+This is the file that defines the navigation header and application
+name.  The online connection status area is also defined here.
 
 The SightCall user definitions are in file `app/model/user.rb`.  Edit
 this file to change user profiles (SightCall 'premium' versus 'standard') or the
 logic that selects their domain ('yourdomain.com').
 
 
-## User Manual
+## Short Feature Overview
 
-This project is both an example and a tutorial for developers with easy to read Javascript.
+This application shows how to connect to the SightCall cloud, and how
+to use some of the main features of the SightCall Realtime Platform.
 
 ### Check your online status
 
 A green check-mark means you're ready to go and the you are connected
-to the SightCall Realtime Platform.  For developers, see how to
-implement this in your own application using the Javascript
-`onConnectionHandler`.
+to the SightCall Realtime Platform.
 
-<img src="images/CommunicatorConnectionStatus.png" width="200px" />
+<img src="images/CommunicatorNarrowConnectionStatus.png" width="200px" />
 
 
 ### Make a one to one call
 
-Select one of your contacts and initiate a one-to-one call.
-SightCall's signaling platform notifies your contact and Communicator
-puts up an alert asking them to answer the call.
+Note the presence status of your contacts.  Select a contact and
+initiate a one-to-one call.  SightCall's signaling platform notifies
+your contact and Communicator displays up an alert asking them to answer
+the call.
 
-<img src="images/CommunicatorFront.png" width="200px" />
-
-
-### Set up a multiparty conference call
-
-Press the `Begin Hosting` button to set up an ad-hoc conference call.
-For each contact you would like to invite, select them from the list
-and press the `Invite` button.  SightCall's signaling platform
-notifies each invitee and Communicator will display an alert asking
-them to join the conference.
-
-
-<img src="images/CommunicatorConference.png" width="200px" />
+<img src="images/CommunicatorNarrowCall.png" width="200px" />
 
 ### Use text chat
 
 Select a contact and press the `Chat` button to begin a text chat.
 SightCall's real-time platform handles chat messaging.  Communicator
 shows how to use pop-up windows to keep each conversation in a
-separate window.  (Please disable your pop-up blocker!)
+separate window.  (Please disable your pop-up blocker when prompted!)
 
-<img src="images/CommunicatorChat.png" width="200px" />
+<img src="images/CommunicatorNarrowChat.png" width="200px" />
+
+
+### Set up a multiparty conference call
+
+Press the `Begin ad-hoc Meeting` button to set up a conference call.
+For each contact you would like to invite, select them from the list
+and press the `Invite` button.  SightCall's signaling platform
+notifies each invitee and Communicator will display an alert asking
+them to join the conference.
+
+
+<img src="images/CommunicatorNarrowConference.png" width="200px" />
+
+Conferences can be recorded by the SightCall Cloud Recorder.  If you
+have enabled this feature, you can enter a Title for your recording
+and press "Start."
+
+
+## Best Practices for using SightCall
+
+The Realtime logic of SightCall Communicator resides in a single file:
+`app/views/call/index.html`.  This file is a good reference for coming
+up to speed on how to connect to the platform and use it.
 
 
 ## Reusable Components
