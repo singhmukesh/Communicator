@@ -52,7 +52,7 @@
       <label for="conf_friend" class="col-sm-2">and invite:</label>
       <div class="col-sm-4">
         <div class="input-group">
-          <%= select_tag("conf_friend", options_from_collection_for_select(@friends, 'rtcc_uid', 'name'), {id: "conf_friend_select", class: "form-control"}) %>
+          <%= select_tag("conf_friend", options_from_collection_for_select(@friends, 'rtcc_uid', 'name'), {id: "conf_friend_select", disabled: "disabled", class: "rtccHostActive form-control"}) %>
           <span class="input-group-btn">
             <button id="invite_button" disabled class="rtccHostActive btn btn-primary" onclick="invite()">Invite</button>
           </span>
@@ -62,7 +62,7 @@
 
     <!-- MANAGE RECORDING -->
     <div class="form-group">
-      <label for="recording_start_button" class="col-sm-2">Cloud Recording:</label>
+      <label for="recording_title" class="col-sm-2">Cloud Recording:</label>
       <div class="col-sm-4">
         <div class="input-group">
           <input id="recording_title" type="text" class="form-control" placeholder="Title (optional) ...">
@@ -167,12 +167,16 @@
      switch(message) {
 
        case 'connectedRtccDriver':
-         $(".rtccConnectionStatus").attr("status", "online");
+         $(".rtccConnectionStatus").attr("status", "connected");
          break; 
 
        case 'connectedWebRTC':
-         $(".rtccConnectionStatus").attr("status", "online");
+         $(".rtccConnectionStatus").attr("status", "connected");
          $(".rtccWebRTCControls").show();
+         break;
+
+       case 'connectedCloud':
+         $(".rtccConnectionStatus").attr("status", "connectedCloud");
          break;
 
        case 'disconnectedRtccDriver':
@@ -188,12 +192,12 @@
          break;
 
        case 'sipOk':
-         // look for class rtccConnectionActive and mark enabled
+         $(".rtccConnectionStatus").attr("status", "sipOk");
          $(".rtccConnectionActive").removeAttr("disabled");
          break;
 
        case 'sipNok':
-         // look for class rtccConnectionActive and mark disabled
+         $(".rtccConnectionStatus").attr("status", "offline");
          $(".rtccConnectionActive").attr("disabled", "disabled");
          break;
 
@@ -325,7 +329,7 @@
      }
    };
 
-   // onBurstUpdate and onPresenceUpdate are called to notify us of
+   // onRosterUpdate and onPresenceUpdate are called to notify us of
    // presence updates.
 
    rtcc.onRosterRetrieved = onRosterRetrieved;
@@ -550,7 +554,7 @@
      // success
      function(recording) {
        rtccRecording = recording;
-       rtccCall.recordStart(recording.upload_url, 7);
+       rtccCall.recordStart(recording.upload_url, 1);
        rtccRecordingCounter = new CounterManager("#recording_counter", "");
      },
      // failure
@@ -614,7 +618,7 @@
  }
 
  // Recording: Poll the cloud-recorder for status changes on the current recording.
- // Format a helpful message in the progress area.
+ // Format a helpful message in the results area.
 
  function pollForRecordingDetail(rtccRecording, cnt) {
    if (cnt > 200) {
