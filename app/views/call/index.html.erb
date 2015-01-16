@@ -11,7 +11,7 @@
 
 <div class="container well">
 
-  <h3>Chat / Call</h3>
+  <h4>Chat / Video Call</h4>
 
   <table class="table table-condensed table-striped">
     <thead>
@@ -20,8 +20,7 @@
     <tbody>
       <% @friends.each do |friend| %>
         <tr>
-          <td> <%= friend.name %> </td>
-          <td> <span class="rtccPresenceStatus" status="unknown" rtccUid="<%= friend.rtcc_uid %>"> </span> </td>
+          <td> <div class="rtccPresenceStatus" status="unknown" rtccUid="<%= friend.rtcc_uid %>"> </div> <%= friend.name %> </td>
           <td>
             <button disabled class="rtccConnectionActive btn btn-xs" onclick="chatFriend('<%= friend.rtcc_uid %>')">Chat</button>
             <button disabled class="rtccConnectionActive btn btn-xs" onclick="callFriend('<%= friend.rtcc_uid %>')">Call</button>
@@ -35,42 +34,58 @@
 
 <div class="container well">
 
-  <h3>Conference</h3>
+  <h4>Video Conference</h4>
 
-  <!-- TAB CONFERENCE -->
-  <div role="tabpanel" class="tab-pane" id="conference">
-    <br>
-    <div class="form-horizontal">
-      <div class="form-group">
-        <div class="col-sm-4">
-          <button id="host_button" disabled class="rtccConnectionActive btn btn-large btn-primary" disabled onclick="createMeetingPoint()">Begin Hosting</button>
-        </div>
+  <div class="form-horizontal">
 
-        <div class="col-sm-2">
-          <button id="recording_start_button" disabled class="rtccCallActive btn btn-large" onclick="newRecording()" >Record Start</button>
-        </div>
-        <div class="col-sm-2">
-          <button id="recording_stop_button" disabled class="rtccCallActive btn btn-large" onclick="stopRecording()" >Record Stop</button>
-        </div>
-        <div class="col-sm-2">
-          <span id="recording_counter" style="color:red"></span>
-        </div>
-        <div class="col-sm-3">
-          <span id="recording_results"></span>
-        </div>
+    <!-- LAUNCH MEETING -->
+    <div class="form-group">
+      <label for="host_button" class="col-sm-2">Start a meeting:</label>
+
+      <div class="col-sm-4">
+        <button id="host_button" disabled class="rtccConnectionActive btn btn-primary btn-block" disabled onclick="createMeetingPoint()">Begin ad-hoc Meeting</button>
       </div>
+    </div>
 
-      <div class="form-group">
-
-        <label for="conf_friend" class="col-sm-1 control-label">Friend:</label>
-        <div class="col-sm-3">
+    <!-- INVITE CONTACT -->
+    <div class="form-group">
+      <label for="conf_friend" class="col-sm-2">and invite:</label>
+      <div class="col-sm-4">
+        <div class="input-group">
           <%= select_tag("conf_friend", options_from_collection_for_select(@friends, 'rtcc_uid', 'name'), {id: "conf_friend_select", class: "form-control"}) %>
-        </div>
-        <div class="col-sm-2">
-          <button id="invite_button" disabled class="rtccCallActive btn btn-large btn-primary" onclick="invite()">Invite</button>
+          <span class="input-group-btn">
+            <button id="invite_button" disabled class="rtccHostActive btn btn-primary" onclick="invite()">Invite</button>
+          </span>
         </div>
       </div>
     </div>
+
+    <!-- MANAGE RECORDING -->
+    <div class="form-group">
+      <label for="recording_start_button" class="col-sm-2">Cloud Recording:</label>
+      <div class="col-sm-4">
+        <div class="input-group">
+          <input id="recording_title" type="text" class="form-control" placeholder="Title (optional) ...">
+          <span class="input-group-btn">
+            <button id="recording_start_button" disabled class="rtccHostActive btn btn-primary" onclick="newRecording()" >Start</button>
+          </span>
+          <span class="input-group-btn">
+            <button id="recording_stop_button" disabled class="rtccHostActive btn btn-primary" onclick="stopRecording()" >Stop</button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECORDING STATUS DISPLAY -->
+    <div class="form-group">
+      <div class="col-sm-2">
+        <span id="recording_counter" style="color:red"></span>
+      </div>
+      <div class="col-sm-4">
+        <span id="recording_results"></span>
+      </div>
+    </div>
+
   </div>
 
 </div>
@@ -246,6 +261,11 @@
      if (args.status == "terminated") {
        // look for class rtccCallActive and mark disabled
        $(".rtccCallActive").attr("disabled", "disabled");
+       $(".rtccHostActive").attr("disabled", "disabled");
+
+       if (rtccRecording != null) {
+         interruptRecording();
+       }
      }
 
    }
@@ -260,6 +280,10 @@
        MPI = obj;       // the object is the meeting point
        MPI.autoaccept_mode(); // allow attendees to join with no confirmation
        MPI.host(); // start hosting the conference
+     }
+
+     if (action == 'meetingPointHosted') {
+       $(".rtccHostActive").removeAttr("disabled");
      }
 
      if (action == 'attendeeInvited') {
@@ -518,8 +542,11 @@
 
  function newRecording() {
 
+   var title = $("#recording_title").val();
+
    // Allocate a new recording on the cloud recorder
    rtccCloudrecorderManager.create(
+     title,
      // success
      function(recording) {
        rtccRecording = recording;
@@ -540,12 +567,28 @@
  //
 
  function stopRecording() {
+
+   $("recording_title").val("");
+
    if (rtccCall != null) {
      rtccCall.recordStop();
      rtccRecordingCounter.stop();
      $("#recording_counter").html("recording stopped");
-     pollForRecordingDetail(0);
+     pollForRecordingDetail(rtccRecording, 0);
+     rtccRecording = null;
    }
+ }
+
+ //
+ // Recording: the call has been interrupted and as a result, the
+ // recording has been terminated.
+ //
+
+ function interruptRecording() {
+   rtccRecordingCounter.stop();
+   $("#recording_counter").html("recording interrupted");
+   pollForRecordingDetail(rtccRecording, 0);
+   rtccRecording = null;
  }
 
  // Recording: format the URLs of the movie types the cloud-recorder
@@ -573,7 +616,7 @@
  // Recording: Poll the cloud-recorder for status changes on the current recording.
  // Format a helpful message in the progress area.
 
- function pollForRecordingDetail(cnt) {
+ function pollForRecordingDetail(rtccRecording, cnt) {
    if (cnt > 200) {
      // do not poll forever
      return;
@@ -586,7 +629,7 @@
        console.log(["poll recording", recording]);
 
        if (recording.status != "done") {
-         setTimeout(function() { pollForRecordingDetail(cnt+1) }, 1000);
+         setTimeout(function() { pollForRecordingDetail(rtccRecording, cnt+1) }, 1000);
          $("#recording_results").html("Movies: <progress max=\"100\"></progress>");         
        }
        else {
