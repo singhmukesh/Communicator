@@ -36,9 +36,9 @@ th { border-bottom: 1px solid #DDD; }
  }
 
 /*
- * TOM: eliminate the outgoing-call popup box
+ * TOM: eliminate the incoming and outgoing-call popup box
  */
 
 body .outgoing-call { display: none }
-
+body .incoming-call { display: none }
 
