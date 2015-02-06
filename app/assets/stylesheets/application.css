@@ -35,3 +35,10 @@ th { border-bottom: 1px solid #DDD; }
   @extend .error;
  }
 
+/*
+ * TOM: eliminate the outgoing-call popup box
+ */
+
+body .outgoing-call { display: none }
+
+

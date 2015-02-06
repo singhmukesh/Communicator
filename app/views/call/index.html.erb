@@ -6,6 +6,8 @@
     <%= image_tag("Girl_with_a_Pearl_Earring.jpg", size: "320x180", style: "position:absolute") %>
     <%#= image_tag("SightCall_Logo.png", size: "320x180", style: "position:absolute") %>
   </div>
+  <div id="outgoing-call-status">
+  </div>
 
 </div>
 
@@ -270,6 +272,16 @@
        if (rtccRecording != null) {
          interruptRecording();
        }
+     }
+
+     // The following two clauses manage the indication of outgoing call activity.
+     // (In application.css, we disabled the display of the default .outgoing-call popup.)
+     if (args.status == "outgoing") {
+       $("#outgoing-call-status").html("<b>... calling ...</b>");
+     }
+
+     if ((args.status == "active") || (args.status == "terminated")) {
+       $("#outgoing-call-status").html("");
      }
 
    }
