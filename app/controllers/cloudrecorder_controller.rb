@@ -63,5 +63,27 @@ class CloudrecorderController < ApplicationController
       }
     end
   end
+
+  #
+  # Request a new Presigned POST url
+  #
+
+  def presigned
+    logger.debug "CALLING PRESIGNED"
+    if CLOUDRECORDER_TOKEN
+      begin
+        response = RestClient.post("#{CLOUDRECORDER_BASE}/files/presigned", { }, 'authorization' => "Token token=#{CLOUDRECORDER_TOKEN}")
+        jdata = JSON.parse(response.body)
+        logger.debug "PRESIGNED: #{jdata.inspect}"
+        render :json => jdata
+      rescue => e
+        render :json => {
+          :error => e.message
+        }
+      end
+    else
+      render :json => { :error => "CloudRecorder not configured" }
+    end
+  end
     
 end

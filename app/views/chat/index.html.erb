@@ -21,6 +21,14 @@
   </div>
 </form>
 
+<div id="progress">
+  <div class="bar" style="height: 18px; background: green; width: 0%;"></div>
+</div>
+
+<input id="fileupload" type="file" name="file" class="filestyle" />
+
+<div id="filecontext">&nbsp;</div>
+
 <%= audio_tag("Click03.mp3", id: 'clicksound', autoplay: true, controls: false) %>
 
 <script>
@@ -72,7 +80,70 @@
      }
 
    }
+
+
  }
+
+// This implements the file-sharing facility by using a pre-signed POST to Amazon S3 from the Browser.
+// jQuery-ui fileupload is used to handle the AJAX upload, and the bootstrap add-on 'filestyle' is used for styling.
+// Upon completiong of the upload, we send the Location URL to the chat participant.
+
+$(function() {
+   console.log(['here1']);
+
+   var progressBar = $("#progress .bar");
+   
+   $('#fileupload').fileupload({
+     context: $("filecontext"),
+
+     start: function(e) {
+       progressBar.css('width', "20%");
+     },
+
+     add: function (e, data) {
+       console.log(['add', data]);
+       data.context=$("#filecontext").text("Uploading ...");
+       $.ajax({
+         type: "POST",
+         url: "/cloudrecorder/presigned",
+         cache: false,
+         dataType: "JSON"
+       }).success(function(d) {
+         console.log(["presigned", d]);
+         data.dataType = "XML";
+         data.url = d["puturl"];
+         data.formData = d["formdata"];
+         data.submit();
+       }).error(function(e) {
+         console.log(["error", e]);
+       });
+     },
+
+     done: function (e, data) {
+       console.log(["done", data]);
+       console.log(["done", $(data.jqXHR.responseXML).find("Key").text()]);
+       console.log(["done", $(data.jqXHR.responseXML).find("Location").text()]);
+
+       var location = $(data.jqXHR.responseXML).find("Location").text();
+       var anchor = '<a href="' + location + '">' + location + '</a>';
+
+       chatManager.sendMessage(anchor);
+       progressBar.css('width', "0%");
+       data.context.text("Upload finished.");
+     },
+
+     fail: function(e, data) {
+       console.log(["fail"]);
+       progressBar.css('width', "100%").css('background', "red")
+     },
+
+     progressall: function(e, data) {
+       console.log(['progress', data.loaded]);
+       var progress = parseInt(data.loaded / data.total * 100, 10);
+       progressBar.css('width', progress + '%');
+     }
+   });
+ });
 
 $(document).ready(documentReady);
 

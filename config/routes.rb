@@ -17,6 +17,7 @@ Simplelogin::Application.routes.draw do
 
   post "cloudrecorder/recording"
   get "cloudrecorder/detail"
+  post "cloudrecorder/presigned"
 
   get "chat" => "chat#index"
 
