@@ -22,9 +22,13 @@ for a complete project.  It is not only a showcase of SightCall
 technologies, it is also a tutorial of best-practices and idioms to
 use for embedding SightCall features into your own site.
 
-Communicator is easy to clone and run on your own servers, or you can
-try it out by deploying on [Heroku](http://heroku.com).  (Even a free/hobby account on
-Heroku will suffice.)  Read on.
+Communicator is easy to try out.  You have two options.
+
+1. Try out our public instance with the default usernames/passwords
+   at https://sightcall-communicator.herokuapp.com.
+
+2. Clone and try it out by deploying on [Heroku](http://heroku.com).
+   (Even a free/hobby account on Heroku will suffice.)  Read on.
 
 <img src="images/CommunicatorFullOrig.png" width="75%" />
 
