@@ -1,80 +1,36 @@
 Simplelogin::Application.routes.draw do
-  get "home" => "call/index"
 
+  # The main page of the app is bascally a single-page web-app at this route
+  get  "home" => "call/index"
+
+  # The login and logout logic
+  get  "auth/login"
+  post "auth/login"
+  get  "auth/logout"
+
+  # This method provides an RTCC token for the current logged-in user
+  post "rtcc/callback"
+
+  # The main page of the app, and the friends method
+  get "call/index"
+  get "call/friends"
+
+  # The API is primarily used by a mobile app
   get "api/token"
   get "api/appid"
   get "api/friends"
   get "api/me"
-  get "auth/login"
-  post "auth/login"
-  get "auth/logout"
-  get "call/index"
-  get "call/friends"
-  post "rtcc/callback"
 
-  get "multiparty/host"
-  get "multiparty/attendee"
-
+  # The cloudrecorder controller proxies AJAX calls to the SightCall Cloud-Recorder
   post "cloudrecorder/recording"
-  get "cloudrecorder/detail"
+  get  "cloudrecorder/detail"
   post "cloudrecorder/presigned"
 
+  # Text chats are rendered in a separate window by this controller
   get "chat" => "chat#index"
-
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'call#index'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end
