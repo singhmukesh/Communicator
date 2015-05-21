@@ -92,13 +92,8 @@ $(function() {
    console.log(['here1']);
 
    var progressBar = $("#progress .bar");
-   
-   $('#fileupload').fileupload({
-     context: $("filecontext"),
 
-     start: function(e) {
-       progressBar.css('width', "20%");
-     },
+   $('#fileupload').fileupload({
 
      add: function (e, data) {
        console.log(['add', data]);
@@ -117,6 +112,11 @@ $(function() {
        }).error(function(e) {
          console.log(["error", e]);
        });
+     },
+
+     start: function(e) {
+       console.log(['start']);
+       progressBar.css('width', "20%");
      },
 
      done: function (e, data) {
