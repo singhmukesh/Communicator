@@ -149,6 +149,99 @@
 
  ////////////////////////////////////////////////////////////////
  //
+ // This function is called at the 'call.create' event.  It serves
+ // two purposes: to respond to the 'call.create' event, and to attach
+ // the per-call handlers for the events of the call.
+ //
+
+ function defineCallListeners(call) {
+   rtccCall = call; // set global var
+
+   // Print all call-events for education purposes
+   call.onAll(function() {
+     if (window.console) {
+       console.log('Call: event "' + this.eventName + '" with arguments: ' + JSON.stringify(arguments));
+     }
+   });
+
+   // At the 'call.create' event, determine whether it is incoming or outgoing
+   // and perform the appropriate logic.
+   if (call.getDirection() == "incoming") {
+     if (rtcc.getConnectionMode() == Rtcc.connectionModes.WEBRTC || rtcc.getConnectionMode() == Rtcc.connectionModes.PLUGIN) {
+       var ans = confirm("Accept call from '" + call.dn + "'?");
+       if (ans == true) {
+         rtccCall.accept();
+       }
+       else {
+         rtccCall.hangup();
+       }
+     }
+   }
+
+   // Install the Chrome screenshare extension if requested
+   call.on('chrome.screenshare.missing', function(url) {
+     if (window.location.protocol == "http:") {
+       alert("Chrome screenshare requires an HTTPS connection");
+     }
+     else {
+       answer = confirm("Click OK to download and install the Chrome Screenshare Extension");
+       if (answer == true) {
+         window.open(url);
+       }
+     }
+   });
+
+   call.on('terminate', function(reason) {
+
+     // look for class rtccCallActive and mark disabled
+     $(".rtccCallActive").attr("disabled", "disabled");
+     $(".rtccHostActive").attr("disabled", "disabled");
+
+     if (rtccRecording != null) {
+       interruptRecording();
+     }
+
+     if (reason == 'not allowed') {
+       alert("Call not allowed");
+     }
+
+     if (reason == 'rejected') {
+       alert("Call rejected");
+     }
+
+     if (reason == 'not found') {
+       alert("User not logged in");
+     }
+
+     if (reason == 'busy') {
+       alert("User is busy");
+     }
+   });
+
+   call.on('active', function() {
+     // look for class rtccCallActive and mark enabled
+     $(".rtccCallActive").removeAttr("disabled");
+   });
+
+   // The following clauses we manage the indication of outgoing call activity to customize this app.
+   // (In application.css, we disabled the display of the default .outgoing-call popup.)
+
+   call.on('outgoing', function() {
+     $("#outgoing-call-status").html("<b>... calling ...</b>");
+   });
+
+   call.on('active', function() {
+     $("#outgoing-call-status").html("");
+   });
+
+   call.on('terminated', function() {
+     $("#outgoing-call-status").html("");
+   });
+
+ }
+ 
+ ////////////////////////////////////////////////////////////////
+ //
  // Initialize Real-Time Communication
  //
 
@@ -171,8 +264,8 @@
      }
    });
 
-   // The Client, Cloud and Presence Event Handlers report on the status of the RTCC connection, whether
-   // it is ready to make and receive calls, and when it is able to register for
+   // The Client, Cloud and Presence Event Handlers report on the status of the RTCC connection,
+   // when it is ready to make and receive calls, and when it is able to register for
    // Presence updates.
 
    rtcc.on('client.connect', function(mode) {
@@ -227,90 +320,6 @@
 
    rtcc.on('call.create', defineCallListeners);
 
-   function defineCallListeners(call) {
-     rtccCall = call; // set global var
-
-     // Print all call-events for education purposes
-     call.onAll(function() {
-       if (window.console) {
-         console.log('Call: event "' + this.eventName + '" with arguments: ' + JSON.stringify(arguments));
-       }
-     });
-
-     // TOM: why is this not call.on('incoming'
-     if (call.getDirection() == "incoming") {
-       if (rtcc.getConnectionMode() == Rtcc.connectionModes.WEBRTC || rtcc.getConnectionMode() == Rtcc.connectionModes.PLUGIN) {
-         var ans = confirm("Accept call from '" + call.dn + "'?");
-         if (ans == true) {
-           rtccCall.accept();
-         }
-         else {
-           rtccCall.hangup();
-         }
-       }
-     }
-
-     call.on('chrome.screenshare.missing', function(url) {
-       if (window.location.protocol == "http:") {
-         alert("Chrome screenshare requires an HTTPS connection");
-       }
-       else {
-         answer = confirm("Click OK to download and install the Chrome Screenshare Extension");
-         if (answer == true) {
-           window.open(url);
-         }
-       }
-     });
-
-     call.on('terminate', function(reason) {
-
-       // look for class rtccCallActive and mark disabled
-       $(".rtccCallActive").attr("disabled", "disabled");
-       $(".rtccHostActive").attr("disabled", "disabled");
-
-       if (rtccRecording != null) {
-         interruptRecording();
-       }
-
-       if (reason == 'not allowed') {
-         alert("Call not allowed");
-       }
-
-       if (reason == 'rejected') {
-         alert("Call rejected");
-       }
-
-       if (reason == 'not found') {
-         alert("User not logged in");
-       }
-
-       if (reason == 'busy') {
-         alert("User is busy");
-       }
-     });
-
-     call.on('active', function() {
-       // look for class rtccCallActive and mark enabled
-       $(".rtccCallActive").removeAttr("disabled");
-     });
-
-     // The following clauses we manage the indication of outgoing call activity to customize this app.
-     // (In application.css, we disabled the display of the default .outgoing-call popup.)
-
-     call.on('outgoing', function() {
-       $("#outgoing-call-status").html("<b>... calling ...</b>");
-     });
-
-     call.on('active', function() {
-       $("#outgoing-call-status").html("");
-     });
-
-     call.on('terminated', function() {
-       $("#outgoing-call-status").html("");
-     });
-
-   }
-     
    // The MeetingPoint events handle updates about multiparty and
    // conference call functions.
 
