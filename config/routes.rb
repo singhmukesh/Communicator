@@ -30,7 +30,21 @@ Simplelogin::Application.routes.draw do
   get "chat" => "chat#index"
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
   root 'call#index'
+
+  # The admin namespace implements login/logout
+  namespace :admin do
+    
+    get '/', to: redirect('/users')
+
+    # The login and logout logic
+    get  "auth/login"
+    post "auth/login"
+    get  "auth/logout"
+
+  end
+
+  # The users resources are protected by admin credentials
+  resources :users
 
 end
