@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  validates :profile, presence: true
+
   # Make :password a virtual attribute of the database
   attr_accessor :password
 
@@ -11,13 +13,12 @@ class User < ActiveRecord::Base
   end
 
   def rtcc_profile
-    "premium"
+    "#{profile}"
   end
 
   def rtcc_domain
-    "yourdomain.com"
+    RTCC_DOMAIN_IDENTIFIER
   end
-
 
   def password
     @password
