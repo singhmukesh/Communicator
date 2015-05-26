@@ -48,4 +48,7 @@ end
 # Use rest-client to talk to cloud-recorder
 gem 'rest-client'
 
+# Bootstrap forms
+gem 'bootstrap_form'
+
 gem 'rails_12factor', group: :production
