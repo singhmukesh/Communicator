@@ -122,9 +122,9 @@
      url: url,
      cache: false,
      dataType: "JSON"
-   }).success(function(data) {
-     console.log(["RtccToken Success", data]);
-     success(data);
+   }).success(function(resp) {
+     console.log(["RtccToken Success", resp]);
+     success(resp);
    }).error(function(e) {
      console.log(["RtccToken error", e]);
      failure(e);
@@ -138,8 +138,8 @@
  function setTokenAndAuthenticate(url) {
    getToken(
      url,
-     function(data) {
-       var token = data.token;
+     function(resp) {
+       var token = resp.data;
        rtcc.setToken(token);
        rtcc.authenticate(1);
      }, function(e) {
@@ -330,6 +330,11 @@
    });
 
    rtcc.on('meetingpoint.host.success', function(mph) {
+     $(".rtccHostActive").removeAttr("disabled");
+   });
+
+   // TOM: workaround
+   rtcc.on('meetinpoint.host.success', function(mph) {
      $(".rtccHostActive").removeAttr("disabled");
    });
 
@@ -705,8 +710,8 @@
 
    getToken(
      "/rtcc/callback",
-     function(data) {
-        var token = data.token;
+     function(resp) {
+        var token = resp.data;
        initializeRtcc(rtccAppId, token, "<%= current_user.name %>");
      }, function(e) {
        // the default prints it already
