@@ -371,6 +371,15 @@
      }
    });
 
+   // Install the SightCall Plugin?
+
+   rtcc.on('plugin.missing', function(downloadUrl) {
+     var answer = confirm('Click OK to download and install the RTCC Plugin.');
+     if (answer == true) {
+       window.location = downloadUrl;
+     }
+   });
+
    // The Presence events trigger onRosterUpdate and onPresenceUpdate to notify us of
    // presence updates.
 
