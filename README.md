@@ -1,7 +1,7 @@
 SightCall Communicator
 ======================
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/sightcall/communicator-test"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy on Heroku"></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/sightcall/communicator_test"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy on Heroku"></a></p>
 
 
 SightCall Communicator is a **reference implementation** for a web
