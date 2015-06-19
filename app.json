@@ -24,26 +24,26 @@
         },
         "RTCC_APP_ID" : {
             "description" : "The Application Identifier from the SAPortal",
-            "required" : true,
+            "required" : true
         },
         "RTCC_CLIENT_ID" : {
             "description" : "The Authentication API Client Identifier from the SAPortal",
             "value" : "",
-            "required" : true,
+            "required" : true
         },
         "RTCC_CLIENT_SECRET" : {
-            "description" : "The Authentication API Client Secret from the SAPortal"
+            "description" : "The Authentication API Client Secret from the SAPortal",
             "value" : "",
-            "required" : true,
+            "required" : true
         },
         "RTCC_DOMAIN_IDENTIFIER" : {
-            "description" : "The domain of your app or group of users"
+            "description" : "The domain of your app or group of users",
             "value" : "communi.com",
-            "required" : true,
+            "required" : true
         },
         "CLOUDRECORDER_TOKEN" : {
-            "descrption" : "Optional token for https://recording.sightcall.com"
-            "required" : false,
+            "descrption" : "Optional token for https://recording.sightcall.com",
+            "required" : false
         }
     }
 }
