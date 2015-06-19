@@ -1,6 +1,6 @@
 {
     "name": "SightCall on Heroku",
-    "description": "Easily deploy Sightcall-Communicator demonstration on Heroku",
+    "description": "Easily deploy Sightcall-Communicator instance on Heroku",
     "keywords": [
         "video",
         "HTML5",
@@ -16,8 +16,6 @@
         "postdeploy": "bundle exec rake bootstrap"
     },
     "env": {
-        "RAILS_ENV": "production",
-        "RACK_ENV" : "production",
         "ADMIN_PASSWORD" : {
             "description" : "Password for 'admin' account",
             "required" : false
