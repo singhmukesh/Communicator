@@ -1,0 +1,49 @@
+{
+    "name": "SightCall on Heroku",
+    "description": "Easily deploy Sightcall-Communicator demonstration on Heroku",
+    "keywords": [
+        "video",
+        "HTML5",
+        "WebRTC",
+        "RockStar"
+    ],
+    "website": "https://sightcall.com/",
+    "repository": "https://github.com/sightcall/Communicator",
+    "logo": "http://sightcall.wpengine.com/wp-content/uploads/2014/07/SightCall-Grey-Orange-e1405175386625.png",
+    "success_url": "/",
+    "addons": ["heroku-postgresql:hobby-dev"],
+    "scripts": {
+        "postdeploy": "bundle exec rake bootstrap"
+    },
+    "env": {
+        "RAILS_ENV": "production",
+        "RACK_ENV" : "production",
+        "ADMIN_PASSWORD" : {
+            "description" : "Password for 'admin' account",
+            "required" : false
+        },
+        "RTCC_APP_ID" : {
+            "description" : "The Application Identifier from the SAPortal",
+            "required" : true,
+        },
+        "RTCC_CLIENT_ID" : {
+            "description" : "The Authentication API Client Identifier from the SAPortal",
+            "value" : "",
+            "required" : true,
+        },
+        "RTCC_CLIENT_SECRET" : {
+            "description" : "The Authentication API Client Secret from the SAPortal"
+            "value" : "",
+            "required" : true,
+        },
+        "RTCC_DOMAIN_IDENTIFIER" : {
+            "description" : "The domain of your app or group of users"
+            "value" : "communi.com",
+            "required" : true,
+        },
+        "CLOUDRECORDER_TOKEN" : {
+            "descrption" : "Optional token for https://recording.sightcall.com"
+            "required" : false,
+        }
+    }
+}
