@@ -1,7 +1,7 @@
 SightCall Communicator
 ======================
 
-<p><a href="https://heroku.com/deploy?template=https://github.com/sightcall/communicator_test"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy on Heroku"></a></p>
+<p><a href="https://heroku.com/deploy?template=https://github.com/sightcall/Communicator"><img src="https://www.herokucdn.com/deploy/button.png" alt="Deploy on Heroku"></a></p>
 
 
 SightCall Communicator is a **reference implementation** for a web
@@ -40,6 +40,12 @@ try it out by deploying on [Heroku](http://heroku.com).  (Even a free/hobby acco
 Heroku will suffice.)  Read on.
 
 <img src="images/CommunicatorFullOrig.png" width="75%" />
+
+#### And Mobile Too!
+
+See also
+[Communicator-for-Android](https://github.com/sightcall/Communicator-for-Android),
+a mobile App that you can run on Android.
 
 
 ## Run It On Heroku
