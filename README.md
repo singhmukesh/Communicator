@@ -47,6 +47,7 @@ Heroku will suffice.)  Read on.
 You can run your own instance of SightCall Communicator on Heroku in
 just a few minutes.
 
+
 - If you have not already, you should request an API KEY and credentials from SightCall.
   Get it here: [http://www.sightcall.com/developers/](http://www.sightcall.com/developers/).
 
@@ -72,7 +73,6 @@ running!
 ### Clone this repository and push to Heroku
 
 - Clone this repository so you can customize it.
-
 - Create a new Heroku project for this demo.
 
 ```sh
@@ -129,7 +129,6 @@ directly.
 
 Log into the Administrator interface to add and remove users.  Go to
 the `/admin` path of your installation of Communicator.
-
 
 ## Add the Recording Feature
 
@@ -192,7 +191,6 @@ separate window.  (Please disable your pop-up blocker when prompted!)
 
 To send a File, use the "Choose File" dialog.  The file will be
 uploaded to the cloud and a URL will be sent to your contact.
-
 
 ### Set up a multiparty conference call
 
