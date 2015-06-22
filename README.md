@@ -14,8 +14,18 @@ them onto a base web application using the SightCall platform.
 - one-to-one video and voice
 - multiparty video-teleconference
 - text-chat
+- file transfer
 - presence
 - recording (optional)
+
+Communicator uses WebRTC when available, and uses the SightCall
+"Plugin" when WebRTC is not available.  This ensures that you will
+have the same experience on all supported browsers.
+
+- Chrome (webrtc)
+- Firefox (plugin)
+- Internet Explorer (plugin)
+- Safari (plugin)
 
 SightCall Communicator has been created using common web technologies
 ([Rails](http://rubyonrails.org/),
@@ -37,36 +47,31 @@ Heroku will suffice.)  Read on.
 You can run your own instance of SightCall Communicator on Heroku in
 just a few minutes.
 
-- Clone this repository so you can customize it.
-- If you have not already, you must request an API KEY and credentials from SightCall.
+- If you have not already, you should request an API KEY and credentials from SightCall.
   Get it here: [http://www.sightcall.com/developers/](http://www.sightcall.com/developers/).
 
-- Put the files `client.p12` and `authCA.crt` in the `/certs` directory.  Check them in.
+Once you have registered, you will need these four pieces of information.
 
-```sh
-    % cd certs
-    % git add client.p12
-    % git add authCA.crt
-    % git commit -m "add the certs"
-    % git push
-```
+- your RTCC_APP_ID
+- your RTCC_CLIENT_ID  (this identifies your API KEY)
+- your RTCC_CLIENT_SECRET (this is the secret part)
+- your RTCC_DOMAIN_IDENTIFIER (example: "acme.com")
 
-- Unpack your `client.p12` file into its two components.
+You will also need to choose an
 
-```sh
-    % openssl pkcs12 -in client.p12 -nocerts -out privateKey.pem
-    % openssl pkcs12 -in client.p12 -clcerts -nokeys -out publicCert.pem
-```
+- ADMIN_PASSWORD.
 
-- Check these two files into the `/certs` directory as well.
+### Use the Heroku Button
 
-```sh
-    % git add privateKey.pem
-    % git add publicCert.pem
-    % git commit -m "add the unpacked certs"
-    % git push
-```
+The easiest way to try out Communicator is to press the purple "Heroku
+Button" above.  This will clone this repository into your Heroku
+account and launch an instance.  Put the RTCC credentials you gathered
+above into the Environment Variable slots, and you are off and
+running!
 
+### Clone this repository and push to Heroku
+
+- Clone this repository so you can customize it.
 
 - Create a new Heroku project for this demo.
 
@@ -91,17 +96,10 @@ Note the URL of the project you just created.  (E.g. https://adjective-noun-1234
     % heroku run bundle exec rake bootstrap
 ```
 
-- Set the following Heroku environment variables **exactly** as shown below.
-
-```sh
-    % heroku config:set RTCC_CACERT=certs/authCA.crt
-    % heroku config:set RTCC_CLIENTCERT=certs/publicCert.pem
-    % heroku config:set RTCC_CLIENTCERT_KEY=certs/privateKey.pem
-```
-
 - Set the following Heroku environment variables as appropriate for your SightCall account.
 
 ```sh
+    % herouk config:set ADMIN_PASSSWORD=logmein
     % heroku config:set RTCC_APP_ID=ab01cd34ef56
     % heroku config:set RTCC_CERTPASSWORD=abcdefgh
     % heroku config:set RTCC_CLIENT_ID=7a7a7a7a7a8b8b8b8b8b9c9c9c9c9c
@@ -120,20 +118,17 @@ calls and using text chat.
 - tim / timpassword
 
 
-## Provision additional Users
+### Run the Rails project locally
 
-This little web application does not have an administrator interface, so you can use the command
-line interface with the Rails console to manipulate its database.
+Of course, you can run this Rails project on your local machine.  Edit
+the file `config/environment.rb` to set the RTCC environment variables
+directly.
 
-You can add users like this.
 
-```sh
-    % heroku run bin/rails console
-    > User.new(:name => "new user", :password => "new password").save
-```
+## Use the Admin Interface
 
-Be sure not to forget the **.save**!
-
+Log into the Administrator interface to add and remove users.  Go to
+the `/admin` path of your installation of Communicator.
 
 
 ## Add the Recording Feature
@@ -186,7 +181,7 @@ the call.
 
 <img src="images/CommunicatorNarrowCall.png" width="200px" />
 
-### Use text chat
+### Use text chat, or send a File
 
 Select a contact and press the `Chat` button to begin a text chat.
 SightCall's real-time platform handles chat messaging.  Communicator
@@ -194,6 +189,9 @@ shows how to use pop-up windows to keep each conversation in a
 separate window.  (Please disable your pop-up blocker when prompted!)
 
 <img src="images/CommunicatorNarrowChat.png" width="200px" />
+
+To send a File, use the "Choose File" dialog.  The file will be
+uploaded to the cloud and a URL will be sent to your contact.
 
 
 ### Set up a multiparty conference call

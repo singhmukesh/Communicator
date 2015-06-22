@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Communicator Welcome</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+  <script src="/assets/jquery.js?body=1"></script>
+  <style>
+   body { padding-top: 100px; }
+   footer { margin-top: 50px; }
+   table, td, th { vertical-align: middle; border: none; }
+   th { border-bottom: 1px solid #DDD; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">SightCall Communicator </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Welcome to Communicator</h1>
+
+    <p>
+      Congratulations!  You have successfully installed Sightcall Communicator.
+    </p>
+
+    <h2>Admin Interface</h2>
+    <p>
+      Communicator provides an Admin interface.  When you set up the
+      environment you gave the 'admin' account a password.  Use the
+      Admin account to add and remove user accounts.  Set the
+      'profile' of each account.  A profile determines the
+      capabilities granted to each user account.
+    </p>
+
+    <p>
+      <a href="/admin"> <span id="adminURL">/admin</span></a>
+    </p>
+
+    <h2>User Interface</h2>
+    <p>
+      Users log into the Front-Page of Communicator at the root url.
+      Each user should log in with their Name and Password.
+    </p>
+    
+    <p>
+      <a href="/"> <span id="userURL">/admin</span></a>
+    </p>
+
+    <p>
+      
+  </div>
+
+  <footer>
+    <div class="container">
+      SightCall 2015
+    </div>
+  </footer>
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+  <script>
+   $(document).ready(function() {
+
+     $('#adminURL').html(window.location.origin + '/admin');
+     $('#userURL').html(window.location.origin);
+
+   });
+  </script>
+
+  <script type="text/javascript">
+
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-54596816-1']);
+   _gaq.push(['_gat._forceSSL']);
+   _gaq.push(['_trackPageview']);
+
+   (function () {
+     var ga = document.createElement('script');
+     ga.type = 'text/javascript';
+     ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0];
+     s.parentNode.insertBefore(ga, s);
+   })();
+
+  </script>
+
+</body>
+</html>
