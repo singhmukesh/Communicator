@@ -8,18 +8,7 @@ load(env_vars) if File.exists?(env_vars)
 # Password for the admin user
 ADMIN_PASSWORD = ENV['ADMIN_PASSWORD'] || "whatUsee"
 
-# Path to the Weemo CA Cert
-# RTCC_CACERT = ENV['RTCC_CACERT']
-
-# Paths to the extracted key and cert from the client.p12 file
-# RTCC_CLIENTCERT = ENV['RTCC_CLIENTCERT']
-# RTCC_CLIENTCERT_KEY = ENV['RTCC_CLIENTCERT_KEY']
-
-# Password
-# RTCC_CERTPASSWORD = ENV['RTCC_CERTPASSWORD']
-
-# Weemo Auth endpoint, Client ID and Secret
-# RTCC_AUTH_URL = ENV['RTCC_AUTH_URL']
+# Client ID and Secret
 RTCC_CLIENT_ID = ENV['RTCC_CLIENT_ID']
 RTCC_CLIENT_SECRET = ENV['RTCC_CLIENT_SECRET']
 
@@ -31,7 +20,6 @@ RTCC_DOMAIN_IDENTIFIER = ENV['RTCC_DOMAIN_IDENTIFIER']
 
 # For the cloud recorder
 CLOUDRECORDER_TOKEN = ENV['CLOUDRECORDER_TOKEN']
-# CLOUDRECORDER_UPLOAD_URL = ENV['CLOUDRECORDER_UPLOAD_URL']
 
 # Initialize the Rails application.
 Simplelogin::Application.initialize!
