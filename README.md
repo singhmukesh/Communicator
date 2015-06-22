@@ -13,6 +13,7 @@ them onto a base web application using the SightCall platform.
 
 - one-to-one video and voice
 - multiparty video-teleconference
+- screen-share
 - text-chat
 - file transfer
 - presence
