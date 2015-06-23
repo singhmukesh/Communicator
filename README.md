@@ -69,7 +69,7 @@ You will also need to choose an
 
 - ADMIN_PASSWORD.
 
-### Use the Heroku Button
+#### Use the Heroku Button
 
 The easiest way to try out Communicator is to press the purple "Heroku
 Button" above.  This will clone this repository into your Heroku
@@ -77,7 +77,7 @@ account and launch an instance.  Put the RTCC credentials you gathered
 above into the Environment Variable slots, and you are off and
 running!
 
-### Clone this repository and push to Heroku
+#### Or clone this repository and then push to Heroku
 
 - Clone this repository so you can customize it.
 - Create a new Heroku project for this demo.
@@ -106,11 +106,11 @@ Note the URL of the project you just created.  (E.g. https://adjective-noun-1234
 - Set the following Heroku environment variables as appropriate for your SightCall account.
 
 ```sh
-    % herouk config:set ADMIN_PASSSWORD=logmein
     % heroku config:set RTCC_APP_ID=ab01cd34ef56
-    % heroku config:set RTCC_CERTPASSWORD=abcdefgh
     % heroku config:set RTCC_CLIENT_ID=7a7a7a7a7a8b8b8b8b8b9c9c9c9c9c
     % heroku config:set RTCC_CLIENT_SECRET=19ab19ab19ab19ab28cd28cd28cd28
+    % heroku config:set RTCC_DOMAIN_IDENTIFIER=acme_video.com
+    % herouk config:set ADMIN_PASSSWORD=logmein
 ```
 
 Visit the application at your Heroku URL and log-in as one of the
@@ -129,7 +129,27 @@ calls and using text chat.
 
 Of course, you can run this Rails project on your local machine.  Edit
 the file `config/environment.rb` to set the RTCC environment variables
-directly.
+directly.  The general procedure would be this.
+
+```sh
+    % git clone git@github.com:sightcall/Communicator.git
+    % cd Communicator
+    % bundle install       (install the gems)
+    % bin/rake bootstrap   (migrate the DB and make default users)
+    % bin/rails s          (run the server)
+```
+
+Then visit it at [http://localhost:3000](http://localhost.3000).
+
+And if you want to develop locally, but debug on the public internet,
+I can recommend [ngrok](http://ngrok.com).
+
+```sh
+    ngrok http 3000
+```
+
+This will expose your local webserver to an HTTPS port on the public internet.
+
 
 
 ## Use the Admin Interface
