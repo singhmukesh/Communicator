@@ -145,7 +145,7 @@ And if you want to develop locally, but debug on the public internet,
 I can recommend [ngrok](http://ngrok.com).
 
 ```sh
-    ngrok http 3000
+    % ngrok http 3000
 ```
 
 This will expose your local webserver to an HTTPS port on the public internet.
