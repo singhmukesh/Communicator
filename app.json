@@ -1,10 +1,13 @@
 {
-    "name": "SightCall on Heroku",
-    "description": "Easily deploy Sightcall-Communicator instance on Heroku",
+    "name": "SightCall Communicator",
+    "description": "Open-Source Rails project showing a WebRTC application built on the SightCall platform.  Easily deploy to Heroku with free trial API key.  Video calls, text chat, conferencing, screenshare, recording.",
     "keywords": [
         "video",
         "HTML5",
         "WebRTC",
+        "Ruby",
+        "Rails",
+        "realtime",
         "RockStar"
     ],
     "website": "https://sightcall.com/",
