@@ -1,6 +1,6 @@
 {
     "name": "SightCall Communicator",
-    "description": "Open-Source Rails project showing a WebRTC application built on the SightCall platform.  Easily deploy to Heroku with free trial API key.  Video calls, text chat, conferencing, screenshare, recording.",
+    "description": "Open-Source Rails project showing a WebRTC application built on the SightCall platform.  Transparent plugin support for non-WebRTC browsers.",
     "keywords": [
         "video",
         "HTML5",
