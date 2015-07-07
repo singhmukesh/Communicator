@@ -1,6 +1,6 @@
 {
     "name": "SightCall Communicator",
-    "description": "Open-Source Rails project showing a WebRTC application built on the SightCall platform.  Transparent plugin support for non-WebRTC browsers.",
+    "description": "Rails project showing a Video/WebRTC application built on the SightCall platform.  Transparent plugin support for non-WebRTC browsers.",
     "keywords": [
         "video",
         "HTML5",
